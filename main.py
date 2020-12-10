@@ -10,16 +10,14 @@ def check(proxy):
         if checker.check_proxy(proxy) is True:
             goods.append(proxy)
             print(proxy)
-        else:
-            print(False)
     except:
         pass
 
 
 checker = Checker()
-proxy_filename = "proxy.txt"
-proxy_list = []
-goods = []
+proxy_filename = "proxy.txt"  # File with proxy by default
+proxy_list = []  # Proxies will be copied from that file to this list
+goods = []  # Working proxies
 
 try:
     f = open(proxy_filename, "r")
