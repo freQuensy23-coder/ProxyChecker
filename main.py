@@ -2,6 +2,7 @@ from Checker import Checker
 import threading
 from requests import get, exceptions
 import time
+import datetime
 
 
 def check(proxy):
@@ -41,3 +42,7 @@ for t in t_list:
     t.join()
 
 print(len(goods))
+# Now save proxies
+with open("Goods.txt", "w") as save_file:
+    for good_proxy in goods:
+        save_file.write(good_proxy[list(good_proxy.keys())[0]] + "\n")
