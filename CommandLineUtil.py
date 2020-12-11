@@ -1,6 +1,6 @@
 import argparse
 import os
-from Core import get_proxies_from_file, generate_threads
+from Core import get_proxies_from_file, generate_threads, save_goods
 from Checker import Checker
 import threading
 
@@ -34,6 +34,7 @@ if args.threads == 0:  # If user don't want to use threading
         if checker.check_proxy(proxy_dict=proxy):
             goods.append(proxy)
             print(proxy)
+    save_goods(goods)
 
 elif args.threads == -1:
     # Number of threads = Number of proxies
@@ -43,4 +44,6 @@ elif args.threads == -1:
 
     for t in t_list:
         t.join()  # Waiting for process end checking
-    print(goods)
+    save_goods(goods)
+else:
+    pass  # TODO Generate some threads
