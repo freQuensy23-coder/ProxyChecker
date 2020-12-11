@@ -18,23 +18,20 @@ def save_goods(goods, filename="Goods.txt"):
             save_file.write(good_proxy[list(good_proxy.keys())[0]] + "\n")
 
 
-def check(proxy, checker):
-    """Функция для работы с многопоточностью"""
-    goods = []
+def check(proxy, checker, goods):
     try:
         if checker.check_proxy(proxy) is True:
             goods.append(proxy)
-            print(proxy)
     except:
         pass
     return goods
 
 
-def generate_threads(proxies, checker, func=check):
+def generate_threads(proxies, checker, goods, func=check):
     """Return list of non started threads to check using checker"""
     t_list = []  # List of threads
     for i, proxy in enumerate(proxies):
-        t = threading.Thread(target=func, name=f"thread {i}", args=(proxy, checker))
+        t = threading.Thread(target=func, name=f"thread {i}", args=(proxy, checker, goods))
         t_list.append(t)
     return t_list
 

@@ -4,8 +4,6 @@ from Core import get_proxies_from_file, generate_threads
 from Checker import Checker
 import threading
 
-
-
 parser = argparse.ArgumentParser(description="Proxy checker")
 parser.add_argument("--file",
                     action="store",
@@ -20,7 +18,7 @@ parser.add_argument("--threads",
                     default=-1,
                     help="Select number of threads. -1 => Number of threads = Number of proxies, 0 - No threading.")
 
- # TODO Add timeout
+# TODO Add timeout
 
 args = parser.parse_args()
 checker = Checker()
@@ -39,10 +37,10 @@ if args.threads == 0:  # If user don't want to use threading
 
 elif args.threads == -1:
     # Number of threads = Number of proxies
-    t_list = generate_threads(proxies)
+    t_list = generate_threads(proxies, checker=checker, goods=goods)
     for t in t_list:
         t.start()
 
     for t in t_list:
         t.join()  # Waiting for process end checking
-
+    print(goods)
