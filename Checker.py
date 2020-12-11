@@ -19,6 +19,7 @@ class Checker():
             r = req.get(site)
             if r.status_code != self.normal_status_code:
                 return False
+        return True
 
     def check_proxy(self, proxy_dict):
         try:
