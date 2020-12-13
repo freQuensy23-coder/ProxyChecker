@@ -17,11 +17,17 @@ parser.add_argument("--threads",
                     type=int,
                     default=-1,
                     help="Select number of threads. -1 => Number of threads = Number of proxies, 0 - No threading.")
+parser.add_argument("--timeout",
+                    action="store",
+                    dest="timeout",
+                    default=30,
+                    type=int,
+                    help='Time, during that program will wait the answer from proxy.')
 
-# TODO Add timeout
 
 args = parser.parse_args()
 checker = Checker()
+checker.time_out = args.timeout
 goods = []
 
 # Проверяем соединение
