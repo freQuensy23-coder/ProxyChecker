@@ -1,6 +1,6 @@
 import argparse
 import os
-from Core import get_proxies_from_file, generate_threads, save_goods
+from Core import get_proxies_from_file, generate_threads, save_goods, slice_list, generate_multi_task_threads
 from Checker import Checker
 import threading
 
@@ -52,4 +52,11 @@ elif args.threads == -1:
         t.join()  # Waiting for process end checking
     save_goods(goods)
 else:
-    pass  # TODO Generate some threads
+    threads = args.threads
+    sorted_proxies = slice_list(proxies, threads)
+    t_list = generate_multi_task_threads(checker=checker, goods=goods, proxies=sorted_proxies)
+    for t in t_list:
+        t.start()
+    for t in t_list:
+        t.join()
+    save_goods(goods)

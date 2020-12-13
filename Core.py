@@ -27,11 +27,27 @@ def check(proxy, checker, goods):
     return goods
 
 
+def check_list_of_proxies(proxy_list, checker, goods):
+    """Func for multi task threading."""
+    for proxy in proxy_list:
+        check(proxy, checker, goods)
+    return goods
+
+
 def generate_threads(proxies, checker, goods, func=check):
-    """Return list of non started threads to check using checker"""
+    """Return list of non started threads to check using checker. Every thread will check only one proxy"""
     t_list = []  # List of threads
     for i, proxy in enumerate(proxies):
         t = threading.Thread(target=func, name=f"thread {i}", args=(proxy, checker, goods))
+        t_list.append(t)
+    return t_list
+
+
+def generate_multi_task_threads(proxies, checker, goods, func=check_list_of_proxies):
+    """Return list of non started threads to check using checker. Every thread will check list of proxies proxies[i]"""
+    t_list = []
+    for i, proxi_list_for_thread in enumerate(proxies):
+        t = threading.Thread(target=func, name=f"Multitask thread # {i}", args=(proxi_list_for_thread, checker, goods))
         t_list.append(t)
     return t_list
 
@@ -48,3 +64,5 @@ def slice_list(list_: list, n: int):
             result.append(list_[prev_last:prev_last + els_in_slice])
             prev_last += els_in_slice
     return result
+
+
