@@ -11,6 +11,7 @@ pip install requests
 python CommandLineUtil.py --file proxy.txt --threads -1 --timeout 20
 ```
 Result will be saved to Goods.txt
+
 Proxy.txt example: 
 ```
 40.113.206.14:80
@@ -25,3 +26,19 @@ Proxy.txt example:
 104.248.26.39:8080
 173.236.180.243:19646
 ```
+
+
+# Using in your projects
+```python
+from Checker import checker
+checker.time_out = 30
+if checker.check_connection: # If user is on line
+   list_to_check = [{
+    "http": "http://" + "185.156.172.122" + ":" + "3128",
+    "https": "https://"+ "96.18.70.146" + ":" + "3128"
+  }]
+  
+  for proxy in list_to_check:
+    print(checker.check_proxy(proxy_dict=proxy))
+
+
