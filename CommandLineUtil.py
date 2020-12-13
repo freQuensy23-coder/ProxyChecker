@@ -24,7 +24,6 @@ parser.add_argument("--timeout",
                     type=int,
                     help='Time, during that program will wait the answer from proxy.')
 
-
 args = parser.parse_args()
 checker = Checker()
 checker.time_out = args.timeout
