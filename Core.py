@@ -58,11 +58,12 @@ def slice_list(list_: list, n: int):
         raise IndexError
     else:
         result = []
-        els_in_slice = int(len(list_) / n)  # Number of els in one
+        els_in_slice = int(len(list_) / n) +1  # Number of els in one
         prev_last = 0
-        for i in range(n):
+        for i in range(n-1):
             result.append(list_[prev_last:prev_last + els_in_slice])
             prev_last += els_in_slice
+        result.append(list_[prev_last:])
     return result
 
 
