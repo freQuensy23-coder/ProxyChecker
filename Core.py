@@ -56,7 +56,7 @@ def slice_list(list_: list, n: int):
     """Slice list list_ into n slices. Returns list of list."""
     if n > len(list_):
         raise IndexError
-    else:
+    elif len(list_) % n != 0:
         result = []
         els_in_slice = int(len(list_) / n) +1  # Number of els in one
         prev_last = 0
@@ -64,6 +64,11 @@ def slice_list(list_: list, n: int):
             result.append(list_[prev_last:prev_last + els_in_slice])
             prev_last += els_in_slice
         result.append(list_[prev_last:])
+    else:
+        result = []
+        els_in_slice = int(len(list_) / n)  # Number of els in one
+        prev_last = 0
+        for i in range(n):
+            result.append(list_[prev_last:prev_last + els_in_slice])
+            prev_last += els_in_slice
     return result
-
-
