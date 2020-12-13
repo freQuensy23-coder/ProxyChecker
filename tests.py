@@ -20,7 +20,6 @@ class TestUM(unittest.TestCase):
         """If number of slices mod len(list_) is not  0"""
         list_ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         list_3 = slice_list(list_, 3)
-        print(list_3)
         for i in [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]:
             self.assertIn(i, list_3)
 
