@@ -23,6 +23,10 @@ class TestUM(unittest.TestCase):
         for i in [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]:
             self.assertIn(i, list_3)
 
+    def test_array_slice_to_short(self):
+        list_ = [1]
+        self.assertRaises(IndexError, slice_list(list_, 2))
+
 
 if __name__ == '__main__':
     unittest.main()
