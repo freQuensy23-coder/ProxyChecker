@@ -23,9 +23,17 @@ parser.add_argument("--timeout",
                     default=30,
                     type=int,
                     help='Time, during that program will wait the answer from proxy.')
+parser.add_argument("--dest",
+                    action="store",
+                    dest="dest",
+                    default="Goods.txt",
+                    type=str,
+                    help='Select txt filename to save goods into it. Default Goods.txt'
+                    )
 
 args = parser.parse_args()
 checker = Checker()
+goods_dest = args.dest
 checker.time_out = args.timeout
 goods = []
 
@@ -49,7 +57,7 @@ elif args.threads == -1:
 
     for t in t_list:
         t.join()  # Waiting for process end checking
-    save_goods(goods)
+    save_goods(goods, filename=goods_dest)
 else:
     threads = args.threads
     sorted_proxies = slice_list(proxies, threads)
@@ -58,4 +66,4 @@ else:
         t.start()
     for t in t_list:
         t.join()
-    save_goods(goods)
+    save_goods(goods, filename=goods_dest)
