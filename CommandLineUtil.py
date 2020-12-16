@@ -3,6 +3,7 @@ import os
 from Core import get_proxies_from_file, generate_threads, save_goods, slice_list, generate_multi_task_threads
 from Checker import Checker
 import threading
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser(description="Proxy checker")
 parser.add_argument("--file",
@@ -55,7 +56,7 @@ elif args.threads == -1:
     for t in t_list:
         t.start()
 
-    for t in t_list:
+    for t in tqdm(t_list):
         t.join()  # Waiting for process end checking
     save_goods(goods, filename=goods_dest)
 else:
@@ -64,6 +65,6 @@ else:
     t_list = generate_multi_task_threads(checker=checker, goods=goods, proxies=sorted_proxies)
     for t in t_list:
         t.start()
-    for t in t_list:
+    for t in tqdm(t_list):
         t.join()
     save_goods(goods, filename=goods_dest)
