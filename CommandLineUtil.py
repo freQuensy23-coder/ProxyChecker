@@ -51,14 +51,14 @@ if args.threads == 0:  # If user don't want to use threading
     save_goods(goods)
 
 elif args.threads == -1:
-    # Number of threads = Number of proxies
-    t_list = generate_threads(proxies, checker=checker, goods=goods)
-    for t in t_list:
-        t.start()
+        # Number of threads = Number of proxies
+        t_list = generate_threads(proxies, checker=checker, goods=goods)
+        for t in t_list:
+            t.start()
 
-    for t in tqdm(t_list):
-        t.join()  # Waiting for process end checking
-    save_goods(goods, filename=goods_dest)
+        for t in tqdm(t_list):
+            t.join()  # Waiting for process end checking
+        save_goods(goods, filename=goods_dest)
 else:
     threads = args.threads
     sorted_proxies = slice_list(proxies, threads)

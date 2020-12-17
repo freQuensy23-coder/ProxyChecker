@@ -11,13 +11,13 @@ class Checker():
                       "http://yandex.ru/",
                       "http://ya.ru",
                       "http://yahoo.com",
-                      "http://www.facebook.com/",
-                      "http://twitter.com/"]
+                      "http://www.facebook.com/"]
 
     def check_connection(self):
         for site in self.sites:
             r = req.get(site)
             if r.status_code != self.normal_status_code:
+                print(site, r)
                 return False
         return True
 
