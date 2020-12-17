@@ -31,7 +31,12 @@ parser.add_argument("--dest",
                     type=str,
                     help='Select txt filename to save goods into it. Default Goods.txt'
                     )
-
+parser.add_argument("--no_pbar",
+                    action="store_true",
+                    dest="no_pbar",
+                    default="False",
+                    help='Dont show progressbar.'
+                    )
 args = parser.parse_args()
 checker = Checker()
 goods_dest = args.dest
@@ -56,7 +61,7 @@ elif args.threads == -1:
     for t in t_list:
         t.start()
 
-    for t in tqdm(t_list):
+    for t in tqdm(t_list, disable=args.no_pbar):
         t.join()  # Waiting for process end checking
     save_goods(goods, filename=goods_dest)
 else:
@@ -65,6 +70,6 @@ else:
     t_list = generate_multi_task_threads(checker=checker, goods=goods, proxies=sorted_proxies)
     for t in t_list:
         t.start()
-    for t in tqdm(t_list):
+    for t in tqdm(t_list, disable=args.no_pbar):
         t.join()
     save_goods(goods, filename=goods_dest)
