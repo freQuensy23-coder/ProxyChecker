@@ -6,7 +6,7 @@ MultiThreading Proxy cheker
 git clone https://github.com/freQuensy23-coder/ProxyChecker/
 pip install requests
 ```
-# Using:
+# Using command line util:
 ```
 python CommandLineUtil.py --file proxy.txt --threads -1 --timeout 20
 ```
